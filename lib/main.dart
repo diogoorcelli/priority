@@ -90,7 +90,7 @@ class AlertPriorityApp extends StatelessWidget {
                                       backgroundColor:
                                           MaterialStatePropertyAll(Colors.red),
                                     ),
-                                    child: const Row(
+                                    child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -117,7 +117,7 @@ class AlertPriorityApp extends StatelessWidget {
                                       backgroundColor: MaterialStatePropertyAll(
                                           Colors.amber),
                                     ),
-                                    child: const Row(
+                                    child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -144,7 +144,7 @@ class AlertPriorityApp extends StatelessWidget {
                                       backgroundColor: MaterialStatePropertyAll(
                                           Colors.lightGreen),
                                     ),
-                                    child: const Row(
+                                    child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
