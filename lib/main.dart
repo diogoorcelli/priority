@@ -68,95 +68,91 @@ class AlertPriorityApp extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      AlertMessenger.of(context).showAlert(
-                                        alert: const Alert(
-                                          backgroundColor: Colors.red,
-                                          leading: Icon(Icons.error),
-                                          priority: AlertPriority.error,
-                                          child: Text(
-                                              'Oops, ocorreu um erro. Pedimos desculpas.'),
-                                        ),
-                                      );
-                                    },
-                                    style: const ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStatePropertyAll(Colors.red),
-                                    ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Icon(Icons.error),
-                                        SizedBox(width: 4.0),
-                                        Text('Error'),
-                                      ],
-                                    ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    AlertMessenger.of(context).showAlert(
+                                      alert: const Alert(
+                                        backgroundColor: Colors.red,
+                                        leading: Icon(Icons.error),
+                                        priority: AlertPriority.error,
+                                        child: Text(
+                                            'Oops, ocorreu um erro. Pedimos desculpas.'),
+                                      ),
+                                    );
+                                  },
+                                  style: const ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStatePropertyAll(Colors.red),
                                   ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      AlertMessenger.of(context).showAlert(
-                                        alert: const Alert(
-                                          backgroundColor: Colors.amber,
-                                          leading: Icon(Icons.warning),
-                                          priority: AlertPriority.warning,
-                                          child: Text(
-                                              'Atenção! Você foi avisado.'),
-                                        ),
-                                      );
-                                    },
-                                    style: const ButtonStyle(
-                                      backgroundColor: MaterialStatePropertyAll(
-                                          Colors.amber),
-                                    ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Icon(Icons.warning_outlined),
-                                        SizedBox(width: 4.0),
-                                        Text('Warning'),
-                                      ],
-                                    ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Icon(Icons.error),
+                                      SizedBox(width: 4.0),
+                                      Text('Error'),
+                                    ],
                                   ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      AlertMessenger.of(context).showAlert(
-                                        alert: const Alert(
-                                          backgroundColor: Colors.green,
-                                          leading: Icon(Icons.info),
-                                          priority: AlertPriority.info,
-                                          child: Text(
-                                              'Este é um aplicativo escrito em Flutter.'),
-                                        ),
-                                      );
-                                    },
-                                    style: const ButtonStyle(
-                                      backgroundColor: MaterialStatePropertyAll(
-                                          Colors.lightGreen),
-                                    ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Icon(Icons.info_outline),
-                                        SizedBox(width: 4.0),
-                                        Text('Info'),
-                                      ],
-                                    ),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    AlertMessenger.of(context).showAlert(
+                                      alert: const Alert(
+                                        backgroundColor: Colors.amber,
+                                        leading: Icon(Icons.warning),
+                                        priority: AlertPriority.warning,
+                                        child:
+                                            Text('Atenção! Você foi avisado.'),
+                                      ),
+                                    );
+                                  },
+                                  style: const ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStatePropertyAll(Colors.amber),
                                   ),
-                                ],
-                              ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Icon(Icons.warning_outlined),
+                                      SizedBox(width: 4.0),
+                                      Text('Warning'),
+                                    ],
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    AlertMessenger.of(context).showAlert(
+                                      alert: const Alert(
+                                        backgroundColor: Colors.green,
+                                        leading: Icon(Icons.info),
+                                        priority: AlertPriority.info,
+                                        child: Text(
+                                            'Este é um aplicativo escrito em Flutter.'),
+                                      ),
+                                    );
+                                  },
+                                  style: const ButtonStyle(
+                                    backgroundColor: MaterialStatePropertyAll(
+                                        Colors.lightGreen),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Icon(Icons.info_outline),
+                                      SizedBox(width: 4.0),
+                                      Text('Info'),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
