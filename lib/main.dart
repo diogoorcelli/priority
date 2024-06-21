@@ -17,9 +17,9 @@ class AlertPriorityApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         iconTheme: const IconThemeData(size: 16.0, color: Colors.white),
-        elevatedButtonTheme: ElevatedButtonThemeData(
+        elevatedButtonTheme: const ElevatedButtonThemeData(
           style: ButtonStyle(
-            minimumSize: WidgetStateProperty.all(const Size(80, 40)),
+            minimumSize: MaterialStatePropertyAll(Size(110, 40)),
           ),
         ),
       ),
@@ -84,7 +84,7 @@ class AlertPriorityApp extends StatelessWidget {
                                 },
                                 style: const ButtonStyle(
                                   backgroundColor:
-                                      WidgetStatePropertyAll(Colors.red),
+                                      MaterialStatePropertyAll(Colors.red),
                                 ),
                                 child: const Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -112,7 +112,7 @@ class AlertPriorityApp extends StatelessWidget {
                                 },
                                 style: const ButtonStyle(
                                   backgroundColor:
-                                      WidgetStatePropertyAll(Colors.amber),
+                                      MaterialStatePropertyAll(Colors.amber),
                                 ),
                                 child: const Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -141,8 +141,8 @@ class AlertPriorityApp extends StatelessWidget {
                                   );
                                 },
                                 style: const ButtonStyle(
-                                  backgroundColor:
-                                      WidgetStatePropertyAll(Colors.lightGreen),
+                                  backgroundColor: MaterialStatePropertyAll(
+                                      Colors.lightGreen),
                                 ),
                                 child: const Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -165,7 +165,7 @@ class AlertPriorityApp extends StatelessWidget {
                             child: ElevatedButton(
                               style: const ButtonStyle(
                                 backgroundColor:
-                                    WidgetStatePropertyAll(Colors.blue),
+                                    MaterialStatePropertyAll(Colors.blue),
                               ),
                               onPressed: AlertMessenger.of(context).hideAlert,
                               child: const Text(
