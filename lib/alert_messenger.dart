@@ -83,17 +83,25 @@ class AlertMessenger extends StatefulWidget {
       throw FlutterError.fromParts(
         [
           ErrorSummary('No AlertMessenger was found in the Element tree'),
-          ErrorDescription('AlertMessenger is required in order to show and hide alerts.'),
-          ...context.describeMissingAncestor(expectedAncestorType: AlertMessenger),
+          ErrorDescription(
+              'AlertMessenger is required in order to show and hide alerts.'),
+          ...context.describeMissingAncestor(
+              expectedAncestorType: AlertMessenger),
         ],
       );
     }
   }
 }
 
-class AlertMessengerState extends State<AlertMessenger> with TickerProviderStateMixin {
+class AlertMessengerState extends State<AlertMessenger>
+    with TickerProviderStateMixin {
   late final AnimationController controller;
   late final Animation<double> animation;
+
+  final List<Alert> _alerts = [];
+  final ValueNotifier<String> _currentAlertTextNotifier =
+      ValueNotifier('Nenhum alerta ativo');
+  AlertPriority? _currentPriority;
 
   Widget? alertWidget;
 
@@ -123,13 +131,43 @@ class AlertMessengerState extends State<AlertMessenger> with TickerProviderState
   }
 
   void showAlert({required Alert alert}) {
-    setState(() => alertWidget = alert);
-    controller.forward();
+    setState(() {
+      if (_alerts.isEmpty ||
+          alert.priority.value >= _alerts.last.priority.value) {
+        _alerts.add(alert);
+        _currentAlertTextNotifier.value = (alert.child as Text).data ?? '';
+        _currentPriority = alert.priority;
+        controller.forward(from: 0);
+      } else if (_currentPriority == null ||
+          alert.priority.value > _currentPriority!.value) {
+        _currentAlertTextNotifier.value = (alert.child as Text).data ?? '';
+        _currentPriority = alert.priority;
+      }
+    });
   }
 
   void hideAlert() {
-    controller.reverse();
+    if (_alerts.isNotEmpty) {
+      setState(() {
+        _alerts.clear();
+        if (_alerts.isEmpty) {
+          _currentAlertTextNotifier.value = 'Nenhum alerta ativo';
+          _currentPriority = null;
+          controller.reverse();
+        } else {
+          _currentAlertTextNotifier.value =
+              (_alerts.last.child as Text).data ?? '';
+          _currentPriority = _alerts.last.priority;
+          controller.reset();
+          controller.forward();
+        }
+      });
+    }
   }
+
+  String get currentAlertText => _currentAlertTextNotifier.value;
+  ValueNotifier<String> get currentAlertTextNotifier =>
+      _currentAlertTextNotifier;
 
   @override
   Widget build(BuildContext context) {
@@ -149,12 +187,13 @@ class AlertMessengerState extends State<AlertMessenger> with TickerProviderState
                 child: widget.child,
               ),
             ),
-            Positioned(
-              top: animation.value,
-              left: 0,
-              right: 0,
-              child: alertWidget ?? const SizedBox.shrink(),
-            ),
+            if (_alerts.isNotEmpty)
+              Positioned(
+                top: animation.value,
+                left: 0,
+                right: 0,
+                child: _alerts.last,
+              ),
           ],
         );
       },
@@ -171,7 +210,8 @@ class _AlertMessengerScope extends InheritedWidget {
   final AlertMessengerState state;
 
   @override
-  bool updateShouldNotify(_AlertMessengerScope oldWidget) => state != oldWidget.state;
+  bool updateShouldNotify(_AlertMessengerScope oldWidget) =>
+      state != oldWidget.state;
 
   static _AlertMessengerScope? maybeOf(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<_AlertMessengerScope>();
